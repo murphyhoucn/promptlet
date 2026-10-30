@@ -2,6 +2,18 @@
 
 对应软件 0.2.2，2026-10-30。
 
+## EXE 安装包
+
+普通用户的首选发行物为 `Promptlet-0.2.2-Setup-x64.exe`。应用二进制与原 v0.2.2 完全相同；仅增加 Inno Setup 安装向导，不改变应用版本或已有标签。
+
+先通过 `scripts/package.ps1` 生成完整 ZIP 及其目录，再安装 Inno Setup 6.7.4 或以上，运行 `scripts/build-installer.ps1 -CompilerPath "实际安装目录\ISCC.exe"`。该脚本校验清单内所有 App 文件，使用 `packaging/Promptlet.iss`、仓库内中文语言资源及编译器随附许可生成单个 EXE 和 SHA-256 文件；可通过 `-PackagePath` 复用已验证的发行目录。
+
+安装器仅支持 Windows 11 x64，当前用户权限安装；注册开始菜单和系统卸载入口，可选桌面快捷方式。安装前通过原有退出事件请求应用关闭；保留既有自启动偏好，卸载仅移除指向本安装路径的自启动项。配置位于应用安装目录外，安装和卸载均不删除。源代码仍为 GPL-3.0-only 加 Windows App SDK 附加许可；Inno 引擎声明随安装分发。中文语言文件来自 Inno Setup 官方仓库，保留维护者公开署名；这不是项目使用者的个人信息。
+
+验证安装器时可使用 `/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /TESTMODE=1 /DIR=工程内隔离路径`。`TESTMODE=1` 仅关闭快捷方式、启动和旧版注册表迁移；仍写入 `Promptlet_is1` 卸载项，因此必须先确认该项不存在，不能覆盖已有 EXE 安装注册。重复安装后校验全部文件、运行隔离的原生烟测，再以 `unins000.exe /VERYSILENT /NORESTART /TESTMODE=1` 验证卸载。该模式不代替正常安装入口和真实配置保留的验收。
+
+原始 v0.2.2 标签和源码 ZIP 保留不变。新增的 `Promptlet-0.2.2-installer-source.zip` 包含完整应用源码及安装器脚本，对应安装器补充提交；发行说明记录其提交 ID。未来版本应在打标签前完成安装器构建和验收。
+
 ## 环境与构建
 
 Windows 11 x64；SDK 10.0.403（global.json）；WinAppSDK 2.6.4；.NET 10。PowerShell 脚本优先调用 `.tools/dotnet/dotnet.exe`。CLI 构建不依赖打开 Visual Studio；使用 IDE 时应选择支持 .NET 10 的版本。

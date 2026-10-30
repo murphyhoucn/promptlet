@@ -8,7 +8,11 @@ Windows 11 x64 提示词优化工具：**复制 → Ctrl + Alt + Space → 自�
 
 ## 获取、安装和启动
 
-项目仓库为 [murphyhoucn/promptlet](https://github.com/murphyhoucn/promptlet)。从 [Releases](https://github.com/murphyhoucn/promptlet/releases) 获取 Windows 11 x64 安装 ZIP 和对应 `.sha256`；同一版本附有对应源码。`artifacts/` 不进入源码仓库，获取源码后也可运行 `scripts/package.ps1` 生成发布包。解压整个安装 ZIP 后选择：
+直接下载 **[Promptlet-0.2.2-Setup-x64.exe](https://github.com/murphyhoucn/promptlet/releases/download/v0.2.2/Promptlet-0.2.2-Setup-x64.exe)**，双击后按中文安装向导操作即可。无需解压、命令行、管理员权限或开发环境。完成后打开设置配置自己的模型服务。可从开始菜单启动，在 Windows“设置 → 应用 → 安装的应用”中卸载；卸载保留用户配置。
+
+项目仓库为 [murphyhoucn/promptlet](https://github.com/murphyhoucn/promptlet)，完整资产见 [Releases](https://github.com/murphyhoucn/promptlet/releases)。每个安装包附有 `.sha256` 校验文件。`Source code (zip/tar.gz)` 和 `source.zip` 是开发者源码，普通用户选择上述 **Setup-x64.exe**。EXE 使用原 v0.2.2 应用文件，新增安装向导，业务功能保持一致；安装器源码另附 `installer-source.zip`。
+
+也保留原 ZIP 供便携运行或脚本安装。完整解压 Windows x64 ZIP 后选择：
 
 - **安装**：双击 `Install.cmd`，按当前 Windows 用户安装，无须管理员权限；创建开始菜单入口和系统“已安装的应用”卸载项。
 - **直接运行**：启动 `App/Promptlet.exe`。必须保留整个 `App` 文件夹，不能只拷贝 EXE。
@@ -74,7 +78,7 @@ src/Promptlet/               WinUI 窗口、托盘/快捷键、原生剪贴板�
 src/Promptlet/Assets/        logo.json 单源参数和生成的 PNG/SVG/ICO
 tests/Promptlet.Core.Tests/  配置、迁移、协议、超时、状态与并发测试
 tests/Promptlet.Windows.Tests/ 实际 DPAPI、备份、只读保护测试（隔离目录）
-packaging/                  当前用户安装和卸载脚本
+packaging/                  Inno Setup 安装向导、中文语言资源及兼容安装/卸载脚本
 scripts/                    构建、测试、发布、打包、原生烟测、资源采样
 docs/                       使用、开发、验证与许可记录
 ```
@@ -88,11 +92,14 @@ docs/                       使用、开发、验证与许可记录
 .\scripts\smoke.ps1            # 原生 XAML/CRUD/DPAPI/窗框烟测，隔离数据，不读真实剪贴板
 .\scripts\publish.ps1          # 自包含目录 artifacts/Promptlet-win-x64
 .\scripts\package.ps1          # 测试、发布、文件哈希、离线 ZIP
+.\scripts\build-installer.ps1 -CompilerPath "Inno Setup 安装目录\ISCC.exe"
 .\scripts\measure.ps1 -Seconds 60 -Published
 python .\scripts\mock_api.py  # 本机模拟协议服务；不是大模型
 ```
 
 模拟接口使用 `http://127.0.0.1:18765/v1`、模型 ID `mock`、Key 留空。可用 `--mode truncated`、`--mode auth-error`、`--delay 0.5` 检查异常与取消。不要把模拟结果当作优化质量验证。
+
+生成 EXE 另需安装 [Inno Setup](https://jrsoftware.org/isdl.php) 6.7.4 或以上，把上面 `CompilerPath` 替换成实际编译器路径；先运行 `package.ps1`，安装器再核对 App 清单 SHA-256 并压缩为单个 `artifacts/release/Promptlet-0.2.2-Setup-x64.exe`。可用 `-PackagePath` 指定已验证的完整发行目录。仓库不包含 Inno 编译器或用户设置。中文资源来自 Inno Setup 官方仓库，第三方署名及许可保留；安装器在当前用户范围写入文件、快捷方式和卸载项，不默认开启自启动。
 
 `PROMPTLET_DATA_DIR` 可为开发 / 烟测指定隔离配置目录；生产通常不设置。`PROMPTLET_FRAME_DIAGNOSTICS` 指定可选原生窗框 NDJSON 输出。`smoke.ps1` 自动设置隔离路径，输出 `artifacts/latest-smoke.json`，并在本次 `artifacts/smoke-*` 目录生成深浅主题的 XAML 控件 PNG 预览。预览使用纯色主题背景，不包含 DWM 毛玻璃和原生标题栏；窗框另外通过原生几何检查。它们不能替代全部 DPI 与桌面环境的视觉验收。
 

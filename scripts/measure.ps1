@@ -1,7 +1,11 @@
 param([ValidateRange(5, 120)][int]$Seconds = 60, [switch]$Published, [switch]$Installed)
 . (Join-Path $PSScriptRoot 'common.ps1')
 $applicationPath = if ($Published) { Join-Path $script:ProjectRoot 'artifacts\Promptlet-win-x64\Promptlet.exe' } else { Get-AppExecutable }
-if ($Installed) { $applicationPath = Join-Path (Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Promptlet').InstallLocation 'Promptlet.exe' }
+if ($Installed) {
+    $installed = (Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Promptlet_is1' -ErrorAction SilentlyContinue).InstallLocation
+    if (-not $installed) { $installed = (Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Promptlet').InstallLocation }
+    $applicationPath = Join-Path $installed 'Promptlet.exe'
+}
 $applicationProcess = Get-Process -Name Promptlet -ErrorAction Stop | Where-Object { $_.Path -eq $applicationPath } | Select-Object -First 1
 if (-not $applicationProcess) { throw 'Start Promptlet first.' }
 $initialCpu = $applicationProcess.TotalProcessorTime.TotalSeconds

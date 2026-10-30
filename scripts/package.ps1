@@ -6,7 +6,9 @@ $releaseRoot = Join-Path $script:ProjectRoot "artifacts\release\Promptlet-$versi
 if (Test-Path -LiteralPath $releaseRoot) { throw 'Release directory already exists; preserve previous artifacts and package in a fresh checkout.' }
 New-Item -ItemType Directory -Path (Join-Path $releaseRoot 'App') -Force | Out-Null
 Get-ChildItem -LiteralPath (Join-Path $script:ProjectRoot 'artifacts\Promptlet-win-x64') -Force | Copy-Item -Destination (Join-Path $releaseRoot 'App') -Recurse -Force
-Get-ChildItem -LiteralPath (Join-Path $script:ProjectRoot 'packaging') -File | Copy-Item -Destination $releaseRoot -Force
+foreach ($installerScript in @('Install.cmd','Install.ps1','Uninstall.ps1')) {
+    Copy-Item -LiteralPath (Join-Path $script:ProjectRoot "packaging\$installerScript") -Destination $releaseRoot -Force
+}
 Copy-Item -LiteralPath (Join-Path $script:ProjectRoot 'README.md') -Destination $releaseRoot -Force
 foreach ($projectLicense in @('LICENSE','LICENSE-NOTICE.md')) {
     Copy-Item -LiteralPath (Join-Path $script:ProjectRoot $projectLicense) -Destination $releaseRoot

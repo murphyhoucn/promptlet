@@ -22,7 +22,8 @@ function Stop-ProjectApp {
     # Graceful IPC shutdown releases the global shortcut and removes the tray icon.
     $applicationPath = Get-AppExecutable
     $publishedPath = Join-Path $script:ProjectRoot 'artifacts\Promptlet-win-x64\Promptlet.exe'
-    $installed = (Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Promptlet' -ErrorAction SilentlyContinue).InstallLocation
+    $installed = (Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Promptlet_is1' -ErrorAction SilentlyContinue).InstallLocation
+    if (-not $installed) { $installed = (Get-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Promptlet' -ErrorAction SilentlyContinue).InstallLocation }
     $installedPath = if ($installed) { Join-Path $installed 'Promptlet.exe' } else { '' }
     $applicationProcesses = @(Get-Process -Name Promptlet -ErrorAction SilentlyContinue | Where-Object { $_.Path -in @($applicationPath, $publishedPath, $installedPath) })
     if ($applicationProcesses.Count -eq 0) { return }

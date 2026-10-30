@@ -40,7 +40,10 @@ BundleArtifacts/
 
 # Publish output
 publish/
-# Shared publish profiles may be source; only per-user overrides are private.
+# Local publish profiles may contain machine paths or credentials.
+*.pubxml
+!*.example.pubxml
+!/Properties/PublishProfiles/win-x64.pubxml
 *.pubxml.user
 PublishScripts/
 

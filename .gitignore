@@ -24,6 +24,10 @@ _ReSharper*/
 *.sln.docstates
 *.DotSettings.user
 *.dotCover
+# Publish profiles can contain machine paths or credentials; share sanitized examples.
+*.pubxml
+!*.example.pubxml
+!/src/Promptlet/Properties/PublishProfiles/win-x64.pubxml
 *.pubxml.user
 
 # Logs, including errors.log.1, and transient files.
@@ -36,8 +40,9 @@ _ReSharper*/
 
 # Runtime settings and encrypted credential backups are private too.
 settings.json
-settings.json.tmp
-settings.json.v1.backup
+settings.json.*
+!settings.json.example
+!settings.json.template
 settings.local.json
 .env
 .env.*
@@ -69,3 +74,13 @@ __pycache__/
 .DS_Store
 *.swp
 *.swo
+
+# Local planning and audit records excluded from the publication checkout.
+/prompt_optimizer_prd_implementation_prompt.md
+/prompt_optimizer_prd_implementation_prompt.original.md
+/docs/prompt_optimizer_prd_implementation_prompt.original.md
+/docs/repository-audit.md
+/docs/discussion-summary.md
+/docs/next-iteration-plan.md
+/docs/project-analysis.md
+/docs/requirements-analysis.md

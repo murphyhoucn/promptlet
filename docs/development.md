@@ -12,7 +12,7 @@
 
 验证安装器时可使用 `/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /TESTMODE=1 /DIR=工程内隔离路径`。`TESTMODE=1` 仅关闭快捷方式、启动和旧版注册表迁移；仍写入 `Promptlet_is1` 卸载项，因此必须先确认该项不存在，不能覆盖已有 EXE 安装注册。重复安装后校验全部文件、运行隔离的原生烟测，再以 `unins000.exe /VERYSILENT /NORESTART /TESTMODE=1` 验证卸载。该模式不代替正常安装入口和真实配置保留的验收。
 
-原始 v0.2.2 标签和源码 ZIP 保留不变。新增的 `Promptlet-0.2.2-installer-source.zip` 包含完整应用源码及安装器脚本，对应安装器补充提交；发行说明记录其提交 ID。未来版本应在打标签前完成安装器构建和验收。
+Release 仅上传 EXE 安装文件，SHA-256 放在发行说明的折叠区，本地生成的校验文件保留作构建记录。完整应用源码及安装器脚本通过固定提交 `f0af547cb2969f287ea6e08b930c39660e3455a6` 的 GitHub 归档链接提供，不重复上传源码 ZIP。原始 v0.2.2 标签保留不变；GitHub 自动生成的 Source code 对应该标签，完整安装器源码以发行说明链接为准。未来版本应在打标签前完成安装器构建和验收。
 
 ## 环境与构建
 

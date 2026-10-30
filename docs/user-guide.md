@@ -2,11 +2,11 @@
 
 ## 安装与卸载
 
-需要 Windows 11 x64。在 [发行页](https://github.com/murphyhoucn/promptlet/releases/tag/v0.2.2) 下载 `Promptlet-0.2.2-Setup-x64.exe`，双击并按中文向导安装。无需解压、命令行或管理员权限；默认位置为当前用户的 `%LOCALAPPDATA%\Programs\Promptlet\0.2.2`，完成后可直接打开设置或从开始菜单启动。`Source code` 和 `source.zip` 是开发者源码，不是安装包。
+需要 Windows 11 x64。在 [发行页](https://github.com/murphyhoucn/promptlet/releases/tag/v0.2.2) 下载 `Promptlet-0.2.2-Setup-x64.exe`，双击并按中文向导安装。无需解压、命令行或管理员权限；默认位置为当前用户的 `%LOCALAPPDATA%\Programs\Promptlet\0.2.2`，完成后可直接打开设置或从开始菜单启动。
 
 从 Windows“已安装的应用”中卸载 Promptlet。EXE 安装版也可运行安装目录的 `unins000.exe`；卸载保留 `%LOCALAPPDATA%\Promptlet` 下的配置。当前版本未签名，Windows 可能显示 SmartScreen 提示，请确认来自官方发行页；无自动更新。
 
-仍提供 `Promptlet-0.2.2-win-x64.zip`：完整解压后用 Install.cmd 安装（其卸载脚本为 Uninstall.ps1），或直接打开 App/Promptlet.exe 便携运行。便携模式必须保留整个 App 文件夹。此前用脚本安装的用户可运行 EXE 覆盖安装，不需要删除个人配置。
+此前用脚本安装的用户可运行 EXE 覆盖安装，不需要删除个人配置。
 
 ## 模型连接
 

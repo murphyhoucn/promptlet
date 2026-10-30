@@ -10,14 +10,9 @@ Windows 11 x64 提示词优化工具：**复制 → Ctrl + Alt + Space → 自�
 
 直接下载 **[Promptlet-0.2.2-Setup-x64.exe](https://github.com/murphyhoucn/promptlet/releases/download/v0.2.2/Promptlet-0.2.2-Setup-x64.exe)**，双击后按中文安装向导操作即可。无需解压、命令行、管理员权限或开发环境。完成后打开设置配置自己的模型服务。可从开始菜单启动，在 Windows“设置 → 应用 → 安装的应用”中卸载；卸载保留用户配置。
 
-项目仓库为 [murphyhoucn/promptlet](https://github.com/murphyhoucn/promptlet)，完整资产见 [Releases](https://github.com/murphyhoucn/promptlet/releases)。每个安装包附有 `.sha256` 校验文件。`Source code (zip/tar.gz)` 和 `source.zip` 是开发者源码，普通用户选择上述 **Setup-x64.exe**。EXE 使用原 v0.2.2 应用文件，新增安装向导，业务功能保持一致；安装器源码另附 `installer-source.zip`。
+发行版见 [Releases](https://github.com/murphyhoucn/promptlet/releases)，仅上传 EXE 安装文件，SHA-256 校验值见发行说明。完整源码（含安装器）可从[对应提交归档](https://github.com/murphyhoucn/promptlet/archive/f0af547cb2969f287ea6e08b930c39660e3455a6.zip)获取。
 
-也保留原 ZIP 供便携运行或脚本安装。完整解压 Windows x64 ZIP 后选择：
-
-- **安装**：双击 `Install.cmd`，按当前 Windows 用户安装，无须管理员权限；创建开始菜单入口和系统“已安装的应用”卸载项。
-- **直接运行**：启动 `App/Promptlet.exe`。必须保留整个 `App` 文件夹，不能只拷贝 EXE。
-
-安装位置为 `%LOCALAPPDATA%\Programs\Promptlet\0.2.2\`。安装脚本在复制前校验应用文件 SHA-256；升级已有启用的开机启动项时更新程序路径。卸载保留用户配置和加密密钥。
+默认安装位置为 `%LOCALAPPDATA%\Programs\Promptlet\0.2.2\`。安装器保留既有自启动偏好，卸载保留用户配置和加密密钥。
 
 发布包自包含 .NET 和 Windows App SDK，不要求用户安装 .NET SDK，依赖许可和声明随 App/Licenses 分发。未提供代码签名、MSIX、商店发布或自动更新；当前已在开发电脑 Windows 11 上部署验证，未做全新系统镜像认证。原生依赖基于 Windows 11 系统组件。
 

@@ -1,0 +1,63 @@
+<Application
+    x:Class="Promptlet.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <BitmapImage x:Key="PromptLogoImage" UriSource="ms-appx:///Assets/LogoLight.png" />
+                    <SolidColorBrush x:Key="PromptAccentBrush" Color="#287B63" />
+                    <SolidColorBrush x:Key="PromptAccentSoftBrush" Color="#14287B63" />
+                    <SolidColorBrush x:Key="PromptSurfaceBrush" Color="#08FFFFFF" />
+                    <SolidColorBrush x:Key="PromptCardBrush" Color="#66FFFFFF" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <BitmapImage x:Key="PromptLogoImage" UriSource="ms-appx:///Assets/LogoDark.png" />
+                    <SolidColorBrush x:Key="PromptAccentBrush" Color="#8CD5B8" />
+                    <SolidColorBrush x:Key="PromptAccentSoftBrush" Color="#188CD5B8" />
+                    <SolidColorBrush x:Key="PromptSurfaceBrush" Color="#08000000" />
+                    <SolidColorBrush x:Key="PromptCardBrush" Color="#15FFFFFF" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <BitmapImage x:Key="PromptLogoImage" UriSource="ms-appx:///Assets/LogoDark.png" />
+                    <SolidColorBrush x:Key="PromptAccentBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+                    <SolidColorBrush x:Key="PromptAccentSoftBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="PromptSurfaceBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="PromptCardBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <CornerRadius x:Key="ControlCornerRadius">10</CornerRadius>
+            <Style x:Key="SettingsCard" TargetType="Border">
+                <Setter Property="CornerRadius" Value="16"/>
+                <Setter Property="Padding" Value="20"/>
+                <Setter Property="Background" Value="{ThemeResource PromptCardBrush}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <CornerRadius x:Key="TextControlCornerRadius">10</CornerRadius>
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="14,8" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="12,9" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style TargetType="PasswordBox">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="12,9" />
+            </Style>
+            <Style x:Key="SectionLabel" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
